@@ -1,18 +1,54 @@
 package com.dev.deijai.organizze.model;
 
+import com.dev.deijai.organizze.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
 public class Usuario {
 
+    private String idUsuario;
     private String nome;
     private String email;
     private String senha;
+    private Double receitaTotal = 0.00;
+    private Double despesaTotal = 0.00;
 
-    public Usuario(String nome, String email, String senha) {
+
+    public Usuario(String nome, String email, String senha, String idUsuario, Double receitaTotal, Double despesaTotal) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.idUsuario = idUsuario;
+        this.receitaTotal = receitaTotal;
+        this.despesaTotal = despesaTotal;
     }
 
     public Usuario() {
+    }
+
+    public Double getReceitaTotal() {
+        return receitaTotal;
+    }
+
+    public void setReceitaTotal(Double receitaTotal) {
+        this.receitaTotal = receitaTotal;
+    }
+
+    public Double getDespesaTotal() {
+        return despesaTotal;
+    }
+
+    public void setDespesaTotal(Double despesaTotal) {
+        this.despesaTotal = despesaTotal;
+    }
+
+    @Exclude
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -31,11 +67,22 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+
+
+    //salvar usuario
+    public void salvar(){
+        DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebaseDatabase();
+        databaseReference.child("usuarios").child(this.idUsuario)
+                .setValue(this);
+
     }
 }
