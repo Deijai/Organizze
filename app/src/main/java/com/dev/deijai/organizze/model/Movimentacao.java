@@ -13,13 +13,15 @@ public class Movimentacao {
     private String descricao;
     private String tipo;
     private Double valor;
+    private String key;
 
-    public Movimentacao(String data, String categoria, String descricao, String tipo, Double valor) {
+    public Movimentacao(String data, String categoria, String descricao, String tipo, Double valor, String key) {
         this.data = data;
         this.categoria = categoria;
         this.descricao = descricao;
         this.tipo = tipo;
         this.valor = valor;
+        this.key = key;
     }
 
     public Movimentacao() {
@@ -63,6 +65,14 @@ public class Movimentacao {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     //salvar movitenção
